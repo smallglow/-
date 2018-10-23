@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+  <title>斗地主</title>
+  <style type="text/css">
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+  body{
+    background: url(./images/bg.png) no-repeat center;
+    overflow: hidden;
+  }
+  li{
+    list-style: none;
+  }
+  .left{
+    width:20%;
+    height: 800px;
+    float: left;
+    transform-style: preserve-3d;
+    transform: rotateZ(90deg);
+  }
+  .mid{
+    width:60%;
+    height: 800px;
+    float: left;
+  }
+  .mid_top{
+    width: 100%;
+    height: 500px;
+    float: left;
+  }
+  .mid_end{
+    width: 100%;
+    height: 300px;
+    float: left;
+  }
+  .right{
+    width:20%;
+    height: 800px;
+    float: right;
+    transform-style: preserve-3d;
+    transform: rotateZ(-90deg);
+
+  }
+
+  .all_poker{
+    width: 125px;
+    height: 175px;
+    margin: 100px auto 0px;
+    position: relative;
+  }
+  .all_poker li{
+    position: absolute;
+
+  }
+  .temp_poker{
+    width: 125px;
+    height: 175px;
+    margin: 100px auto 0px;
+    position: relative;
+  }
+  .back {
+    width:125px;
+    height: 175px;
+    background: url('./images/14.png') -87px -225px;
+    position: absolute;
+    z-index: 100;
+  }
+  .play_1, .play_2, .play_3{
+    width:125px;
+    height: 175px;
+    margin: 150px auto 0px;
+    position: relative;
+  }
+   .play_2{
+    top:-20%;
+   }
+  .play_1 li,.play_2 li,.play_3 li{
+    position: absolute;
+  }
+
+  .play_btn, .play_btn2{
+    display: none;
+    text-align: center;
+  }
+
+   .play_1 .select {
+    top:-20px;
+  }
+   .play_2 .select {
+    top:-20px;
+  }
+   .play_3 .select {
+    top:-20px;
+  }
+  
+  .table{
+    width: 125px;
+    height: 175px;
+    margin: 280px auto 0px;
+    position: relative;
+  }
+  .table li{
+    position: absolute;
+  }
+  
+  input{
+    border:none;
+    position: absolute;
+    cursor:pointer;
+  }
+  .get{
+    width: 80px;
+    height: 80px;
+    background: url(./images/yes.png) no-repeat center;
+  }
+  .cancel{
+    width: 80px;
+    height: 80px;
+    background: url(./images/no.png) no-repeat center;
+  }
+
+  .play_out{
+    width: 80px;
+    height: 80px;
+    background: url(./images/star.png) no-repeat center;
+    /*border:none;
+    position: absolute;*/
+    /*left: 40%;*/
+  }
+   .pass{
+    width: 80px;
+    height: 80px;
+    background: url(./images/false.png) no-repeat center;
+    /*border:none;
+    position: absolute;*/
+    /*left: 45%;*/
+  }
+  .tishi{
+    width: 80px;
+    height: 80px;
+    background: url(./images/tishi.png) no-repeat center;
+
+    /*border:none;
+    position: absolute;*/
+    /*left: 40%;*/
+  }
+  .mid_end .play_out,.mid_end .get{
+    left: 35%;
+  }
+  .mid_end .pass,.mid_end .cancel{
+    left: 44%;
+  }
+   .mid_end .tishi{
+    left: 52%;
+   }
+  .left .play_out,.right .play_out,.left .get,.right .get{
+    left:0%;
+  }
+    .left .pass,.right .pass,.left .cancel,.right .cancel{
+    left:27%;
+  }
+    .left .tishi,.right .tishi{
+    left:52%;
+  }
+  .time{
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 800;
+    display:block;
+    float:right;
+    background-size: 70px 70px; 
+    background: url(./images/clock.png) no-repeat center;
+  }
+  #jinbi1{
+    position: absolute;
+    left:35%;
+    top:58%;
+    display: block;
+    color: gold;
+  }
+  #jinbi2{
+    position: absolute;
+    left:82%;
+    top:85%;
+    display: block;
+    color: gold;
+  }
+  #jinbi3{
+    position: absolute;
+    width: 100px;
+    left:35%;
+    top:58%;
+    display: block;
+    color: gold;
+  }
+  #t2{
+    float: none;
+    position: relative;
+    left:60%;
+  }
+  .po{
+    width: 150px;
+    height: 150px;
+    background: url(./images/tv2.png) no-repeat center;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+  }
+  .po1{
+    width: 150px;
+    height: 150px;
+    background: url(./images/tv3.png) no-repeat center;
+    position: absolute;
+    left: 72%;
+    top: 80%;
+  }
+  .po2{
+    width: 150px;
+    height: 150px;
+    background: url(./images/tv4.png) no-repeat center;
+    position: absolute;
+    left: 87%;
+    top: 5%;
+  }
+  .sf{
+    width: 70px;
+    height: 50px;
+    /*background: url(./images/farmer.png) no-repeat center;*/
+    background: #000;
+    position: absolute;
+    display: none;
+    left: 7%;
+    top: 25%;
+  }
+  .sf1{
+    width: 70px;
+    height: 50px;
+    background: #000;
+    position: absolute;
+    display: none;
+    left: 83%;
+    top: 90%;
+  }
+  .sf2{
+    width: 70px;
+    height: 50px;
+    background: #000;
+    position: absolute;
+    display: none;
+    left: 89%;
+    top: 25%;
+  }
+  .s_left{
+    width:160%;
+    height:100%;
+    position:absolute;
+    background:url(./images/k_4.png);
+    background-size:100% 100%;
+    z-index:111;
+  }
+  .s_right{
+    width:160%;
+    height:100%;
+    position:absolute;
+    right:0;
+    background:url(./images/k_4.png);
+    background-size:100% 100%;
+    z-index:111;
+  }
+.logo{
+    width:200px;
+    height:90px;
+    position:absolute;
+    left:50%;
+    top:70%;
+    margin:0 0 0 -100px;
+    z-index:113;
+  }
+  .logo_left{
+    width:100px;
+    height:90px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-45px 0 0 -100px;
+    background:url(./images/logo.png) no-repeat -164px -101px;
+    z-index:112;
+    cursor:pointer
+  }
+  .logo_right{
+    width:100px;
+    height:90px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-45px 0 0 0;
+    z-index:112;
+    background:url(./images/logo.png) no-repeat -263px -101px;
+    cursor:pointer
+  }
+  .start_btn{
+    width:170px;
+    height:80px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-40px 0 0 -85px;
+    background:url(./images/btn.png) no-repeat center;
+    /*text-shadow: 0 0 20px #D2691E ;*/
+    z-index:111;
+    opacity: 0;
+    cursor:pointer;
+  }
+  .magic{
+    width:100px;
+    height:100px;
+    background:url(./images/魔法弹.png) no-repeat;
+    background-size:100px 100px;
+    border-radius:50%;
+    position:absolute;
+    z-index:100;
+  }
+  .worldofwar{
+    position:absolute;
+    right:0;
+    z-index:111;
+  }
+  .shuffle{
+    position:absolute;
+    left:-10%;
+    top:-20%;
+    z-index:10;
+  }
+  .x_poker{
+    width:100px;
+    height:50px;
+    line-height:50px;
+    position:absolute;
+    top:10%;
+    left:50%;
+    margin:0 0 0 -50px;
+    background:orange;
+    color:#c63300;
+    z-index:101;
+    border-radius:50px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0px 0px  20px #fff;
+  }
+  .f_poker{
+    width:100px;
+    height:50px;
+    line-height:50px;
+    position:absolute;
+    top:10%;
+    left:50%;
+    margin:0 0 0 -50px;
+    background:orange;
+    color:#c63300;
+    z-index:101;
+    border-radius:50px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    display:none;
+    cursor:pointer;
+    box-shadow:0px 0px  20px #fff;
+  }
+  #sf1{
+    position:relative;
+    top:-20%;
+
+  }
+   #sf1 input{
+    margin: 0 -20px 0 0;
+   }
+  .con{
+    position:relative;
+    top:-20%;
+  }
+  .con input{
+     margin: 0 -20px 0 0;
+  }
+  .side{
+    width:157px;
+    height:101px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-50px 0 0 -78px;
+    background:url(./images/翻牌背面.png) no-repeat;
+    z-index:110;
+  }
+  .positive{
+    width:157px;
+    height:101px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-50px 0 0 -78px;
+    background:url(./images/翻牌正面.png) no-repeat;
+    background-size:157px 101px;
+    transform:rotateY(270deg);
+    transition:2s;
+    z-index:110;
+  }
+  </style>
+  <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./js/games.js"></script>
+  <script type="text/javascript" src="./js/animation.js"></script>
+</head>
+<body>
+<!-- <audio class="bgmusic" autoplay="autoplay" loop="loop"  muted>
+  <source src="./audio/667.wav" />
+  您的浏览器垃圾，不支持播放
+</audio> -->
+<div class="left">
+  <ul class="play_1 play"></ul>
+  <p class="play_btn" id="sf" value="">
+    <input class="get" type="button" name="" value="">
+    <input class="cancel" type="button" name="" value="">
+    <span class='time' ></span>
+  </p>
+  <p class="play_btn2">
+    <input class="play_out" type="button" name="" value="">
+    <input class="pass" type="button" name="" value="">
+    <input class="tishi" type="button" name="" value="">
+    <span class='time' ></span>
+  </p>
+  <span id='jinbi1'>金币2000</span>
+</div>
+<div class="mid">
+  <div class="mid_top">
+    <ul class="all_poker">
+      <!-- <li class="back"></li> -->
+    </ul>
+    <div class="x_poker">洗牌</div>
+    <div class="f_poker">发牌</div>
+    <!-- <ul class='table'></ul> -->
+  </div>
+  <div class="mid_end">
+    <ul class="play_2 play">
+      <!--<li style="width: 125px; height: 175px; background: url(./images/14.png) -162px -5px;"></li>
+       <li class="select" style="width: 125px; height: 175px; background: url(./images/14.png) -162px -5px;"></li> -->
+    </ul>
+    <p class="play_btn"  id="sf1">
+
+      <input class="get"  type="button" name="" value="">
+      <input class="cancel" type="button" name="" value="">
+      <span class='time' id='t2'></span>
+
+    </p>
+    <p class="play_btn2 con">
+
+      <input class="play_out" type="button" name="" value="">
+      <input class="pass" type="button" name="" value="">
+      <input class="tishi" type="button" name="" value="">
+      <span class='time ' id="t2"></span>
+    </p>
+    <span id='jinbi2'>金币2000</span>
+  </div>
+</div>
+<div class="right">
+  <ul class="play_3 play"></ul>
+  <p class="play_btn"  id="sf2">
+    <input class="get" type="button" name="" value="">
+    <input class="cancel" type="button" name="" value="">
+    <span class='time'></span>
+  </p>
+  <p class="play_btn2">
+    <input class="play_out" type="button" name="" value="">
+    <input class="pass" type="button" name="" value="">
+    <input class="tishi" type="button" name="" value="">
+    <span class='time'></span>
+  </p>
+  <span id='jinbi3' >金币2000</span>
+</div>
+<audio class="music" src="" autoplay="autoplay">
+  您的浏览器垃圾，不支持播放
+</audio>
+<div class="po"></div>
+<div class="po1"></div>
+<div class="po2"></div>
+<div class="sf"></div>
+<div class="sf1"></div>
+<div class="sf2"></div>
+<ul class="start">
+    <li class="s_left"></li>
+    <li class="s_right"></li>
+    <video class="worldofwar" width="100%"  autoplay="autoplay" loop="loop" src="./vadio/开场动画5.mp4"></video>
+    <!-- <input  type="button" value="进入游戏"> -->
+</ul>
+<ul class="logo">
+    <li class="logo_left"></li>
+    <li class="logo_right"></li>
+    <li class="start_btn"></li>
+</ul>
+</body>
+</html>
